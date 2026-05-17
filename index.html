@@ -139,6 +139,18 @@
             .home-text-container { bottom: 12%; left: 0; transform: none; width: 100%; max-width: none; text-align: center; padding: 0 20px; }
             h1 { white-space: normal; }
         }
+        /* Newsletter modal */
+        .newsletter-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 2000; }
+        .newsletter-overlay.open { display: flex; }
+        .newsletter-modal { background: #111; color: #fff; width: 92%; max-width: 520px; border-radius: 12px; padding: 28px; box-shadow: 0 10px 40px rgba(0,0,0,0.6); transform: translateY(-10px); opacity: 0; transition: opacity .18s ease, transform .18s ease; position: relative }
+        .newsletter-overlay.open .newsletter-modal { transform: translateY(0); opacity: 1; }
+        .newsletter-modal h3 { margin: 0 0 8px; font-size: 1.4rem; }
+        .newsletter-modal p { margin: 0 0 16px; color: rgba(255,255,255,0.9); }
+        .newsletter-input { width: 100%; padding: 12px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.03); color: #fff; box-sizing: border-box; margin-bottom: 12px; font-size: 1rem; }
+        .newsletter-actions { display: flex; gap: 10px; justify-content: flex-end; align-items: center; }
+        .newsletter-actions .btn { padding: 10px 18px; border-radius: 8px; }
+        .newsletter-close { position: absolute; top: 12px; right: 14px; background: transparent; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; }
+        @media (max-width:480px){ .newsletter-modal{ padding:18px } .newsletter-modal h3{font-size:1.1rem} .newsletter-actions{justify-content:stretch;flex-direction:column} }
     </style>
 </head>
 <body>
@@ -205,6 +217,22 @@ Trap, Pop/Rock, Latin Urban, Electropop and Alternative Pop etc..</p>
         <p>For bookings and inquiries:</p>
         <a href="mailto:email@example.com" class="btn">Send Email</a>
     </section>
+
+    <!-- Newsletter modal -->
+    <div id="newsletterOverlay" class="newsletter-overlay" aria-hidden="true">
+      <div class="newsletter-modal" role="dialog" aria-modal="true" aria-labelledby="newsletterTitle">
+         <button class="newsletter-close" id="newsletterClose" aria-label="Close">✕</button>
+         <h3 id="newsletterTitle">Get updates first</h3>
+         <p>Subscribe to our newsletter to be the first to know about new releases and shows.</p>
+         <form id="newsletterForm">
+            <input id="newsletterEmail" class="newsletter-input" type="email" placeholder="Your email address" required>
+            <div class="newsletter-actions">
+               <button type="submit" class="btn">Subscribe</button>
+               <button type="button" class="btn" id="newsletterLater" style="background:transparent;border:1px solid rgba(255,255,255,0.12)">Maybe later</button>
+            </div>
+         </form>
+      </div>
+    </div>
 
     <script>
         const videoIds = [
@@ -276,6 +304,29 @@ Trap, Pop/Rock, Latin Urban, Electropop and Alternative Pop etc..</p>
         });
 
         updateVideo();
+    </script>
+
+    <script>
+    (function(){
+      const overlay = document.getElementById('newsletterOverlay');
+      const closeBtn = document.getElementById('newsletterClose');
+      const laterBtn = document.getElementById('newsletterLater');
+      const form = document.getElementById('newsletterForm');
+      const emailInput = document.getElementById('newsletterEmail');
+      function shouldShow(){
+         if(localStorage.getItem('newsletter_subscribed')==='true') return false;
+         if(localStorage.getItem('newsletter_dismissed')==='true') return false;
+         return true;
+      }
+      function openModal(){ overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false'); if(emailInput) emailInput.focus(); }
+      function closeModal(dismiss=false){ overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); if(dismiss) localStorage.setItem('newsletter_dismissed','true'); }
+      window.addEventListener('load', ()=>{ if(shouldShow()) setTimeout(openModal,1200); });
+      if(closeBtn) closeBtn.addEventListener('click', ()=> closeModal(true));
+      if(laterBtn) laterBtn.addEventListener('click', ()=> closeModal(true));
+      if(overlay) overlay.addEventListener('click', (e)=>{ if(e.target===overlay) closeModal(true); });
+      if(form) form.addEventListener('submit', (e)=>{ e.preventDefault(); const email = (emailInput && emailInput.value||'').trim(); if(!email) return; localStorage.setItem('newsletter_email', email); localStorage.setItem('newsletter_subscribed','true'); form.innerHTML = '<p style="margin:0 0 8px">Thanks — check your inbox!</p>'; setTimeout(()=> closeModal(false),1200); });
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && overlay && overlay.classList.contains('open')) closeModal(true); });
+    })();
     </script>
 </body>
 </html>
