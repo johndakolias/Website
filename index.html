@@ -12,6 +12,7 @@
             background-image: url('https://i.postimg.cc/8CWt4HVj/profile.jpg');
             background-size: cover;
             background-position: 45% 28%;
+            background-repeat: no-repeat;
             background-attachment: fixed;
             color: #fff; 
             font-family: 'Inter', sans-serif; 
@@ -120,7 +121,7 @@
         .video-thumb { min-width: 140px; width: 140px; flex: 0 0 auto; }
 
         @media (max-width: 768px) {
-            body { background-attachment: scroll; }
+            body { background-attachment: scroll; background-position: center top; background-size: 140% auto; }
             section { min-height: auto; padding: 60px 16px; }
             h1 { font-size: 3rem; letter-spacing: -1px; } 
             .subtitle { font-size: 0.85rem; letter-spacing: 3px; }
@@ -137,6 +138,7 @@
             .video-thumbnails { gap: 10px; padding: 12px 0 0; }
         }
         @media (max-width: 480px) {
+            body { background-position: center top; background-size: 120% auto; }
             h1 { font-size: 2.4rem; }
             .subtitle { font-size: 0.75rem; letter-spacing: 2px; }
             .home-text-container { bottom: 10%; padding: 0 12px; }
