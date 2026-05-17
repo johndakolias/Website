@@ -120,13 +120,33 @@
         .video-thumb { min-width: 140px; width: 140px; flex: 0 0 auto; }
 
         @media (max-width: 768px) {
-            h1 { font-size: 2.2rem; letter-spacing: -1px; } 
-            .subtitle { font-size: 0.8rem; letter-spacing: 3px; }
-            nav { gap: 15px; padding: 15px 0; }
-            nav a { font-size: 0.7rem; letter-spacing: 1px; }
-            #home img { object-position: 45% 8%; }
-            .home-text-container { bottom: 12%; left: 0; transform: none; width: 100%; max-width: none; text-align: center; padding: 0 20px; }
-            h1 { white-space: normal; }
+            body { background-attachment: scroll; }
+            section { min-height: auto; padding: 60px 16px; }
+            h1 { font-size: 3rem; letter-spacing: -1px; } 
+            .subtitle { font-size: 0.85rem; letter-spacing: 3px; }
+            nav { gap: 12px; padding: 14px 0; flex-wrap: wrap; }
+            nav a { font-size: 0.75rem; letter-spacing: 1px; }
+            .home-text-container { bottom: 12%; left: 50%; transform: translateX(-50%); width: 90%; max-width: 640px; text-align: center; padding: 0 16px; }
+            .content-box { padding: 24px; max-width: 92%; border-radius: 20px; }
+            .section-title { font-size: 1.7rem; margin-bottom: 32px; }
+            .about-text { font-size: 1.16rem; line-height: 1.9; }
+            .video-frame { height: 280px; }
+            .video-controls button { padding: 12px 16px; font-size: 0.95rem; }
+            .video-thumb { min-width: 100px; width: 100px; }
+            .video-thumb span { font-size: 0.72rem; }
+            .video-thumbnails { gap: 10px; padding: 12px 0 0; }
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: 2.4rem; }
+            .subtitle { font-size: 0.75rem; letter-spacing: 2px; }
+            .home-text-container { bottom: 10%; padding: 0 12px; }
+            .content-box { padding: 20px; }
+            .section-title { font-size: 1.5rem; margin-bottom: 28px; }
+            .video-frame { height: 220px; }
+            .about-text { font-size: 1.08rem; }
+            .btn { padding: 10px 18px; }
+            .newsletter-modal { width: 96%; padding: 18px; }
+            .newsletter-actions { flex-direction: column; }
         }
         /* Newsletter modal */
         .newsletter-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 2000; }
