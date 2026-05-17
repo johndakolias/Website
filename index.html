@@ -17,7 +17,7 @@
         }
         body { 
             background-color: #000;
-            background-image: url('https://i.postimg.cc/8CWt4HVj/profile.jpg');
+            background-image: url('profile.jpg');
             background-size: cover;
             background-position: 45% 28%;
             background-repeat: no-repeat;
@@ -80,16 +80,18 @@
             align-items: center;
             justify-content: center;
             background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.16);
+            border: 1px solid rgba(255,255,255,0.18);
             border-radius: 50%;
-            transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+            transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none;
         }
         .social-links a:hover {
-            background: rgba(255,255,255,0.24);
+            background: rgba(255,255,255,0.22);
             border-color: rgba(255,255,255,0.35);
             transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.18);
         }
-        .social-links svg { width: 18px; height: 18px; fill: #fff; }
+        .social-links svg { width: 20px; height: 20px; fill: #fff; }
         nav a, .nav-menu a { color: #fff; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; }
 
         section { 
@@ -238,16 +240,16 @@
         </div>
         <div class="social-links">
             <a href="https://www.instagram.com/johndakolias/" target="_blank" rel="noreferrer" aria-label="Instagram">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.3 2.4.5.6.2 1 .5 1.4 1 .4.4.7.8 1 1.4.2.5.4 1.2.5 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.9-.5 2.4-.2.6-.5 1-1 1.4-.4.4-.8.7-1.4 1-.5.2-1.2.4-2.4.5-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.3-2.4-.5-.6-.2-1-.5-1.4-1-.4-.4-.7-.8-1-1.4-.2-.5-.4-1.2-.5-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.9.5-2.4.2-.6.5-1 1-1.4.4-.4.8-.7 1.4-1 .5-.2 1.2-.4 2.4-.5C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.4 0-4.6.1-.9.1-1.4.2-1.8.4-.5.2-.9.5-1.3 1-.4.4-.8.8-1 1.3-.2.4-.3.9-.4 1.8-.1 1.2-.1 1.5-.1 4.6s0 3.4.1 4.6c.1.9.2 1.4.4 1.8.2.5.5.9 1 1.3.4.4.8.8 1.3 1 .4.2.9.3 1.8.4 1.2.1 1.5.1 4.6.1s3.4 0 4.6-.1c.9-.1 1.4-.2 1.8-.4.5-.2.9-.5 1.3-1 .4-.4.8-.8 1-1.3.2-.4.3-.9.4-1.8.1-1.2.1-1.5.1-4.6s0-3.4-.1-4.6c-.1-.9-.2-1.4-.4-1.8-.2-.5-.5-.9-1-1.3-.4-.4-.8-.8-1.3-1-.4-.2-.9-.3-1.8-.4-1.2-.1-1.5-.1-4.6-.1zM12 6.2c1.9 0 3.4 1.5 3.4 3.4S13.9 13 12 13s-3.4-1.5-3.4-3.4S10.1 6.2 12 6.2zm0 1.8c-.9 0-1.6.7-1.6 1.6S11.1 11 12 11s1.6-.7 1.6-1.6S12.9 8 12 8zm4.8-1.4c0 .4-.3.7-.7.7s-.7-.3-.7-.7.3-.7.7-.7.7.3.7.7z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm9 1.5c.83 0 1.5.67 1.5 1.5V7h-3.5V4.5H16zm-4 2.5a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm4.5-.5a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5z"/></svg>
             </a>
             <a href="https://www.tiktok.com/@johndakolias" target="_blank" rel="noreferrer" aria-label="TikTok">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 7.5c-1.1 0-2.1-.6-2.7-1.5v7.1c0 2.9-2.4 5.3-5.3 5.3-2.8 0-5.1-2.2-5.3-5h2c.1 1.8 1.7 3.2 3.5 3.2 1.9 0 3.5-1.5 3.5-3.4V5.4h2.3c.9 0 1.7.8 1.7 1.7v.4z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 2h-3.3v7.5c0 1.4.9 2.7 2.2 3.2v3.6c-1.9-.5-3.4-2.2-3.4-4.2 0-2.4 1.9-4.3 4.3-4.3h.2V2z"/></svg>
             </a>
             <a href="https://www.facebook.com/johndakolias" target="_blank" rel="noreferrer" aria-label="Facebook">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.1 8.2h1.9V5.2h-1.9c-2.1 0-3.4 1.3-3.4 3.3v1.4H9.6v2.3h1.9V19h2.5v-4.8h1.9l.3-2.3h-2.2V9.2c0-.6.2-1 .9-1z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 8h-2c-.5 0-.8.4-.8.9v2.1H8.4v2.4H12V19h2.4v-6.6h1.9l.3-2.4H14.4V9c0-.4.3-.9.8-.9h.8V6.1h-1.4c-1.7 0-2.7 1.1-2.7 2.7v1.2H9.8v2.4H12V19h3.1v-6.6h1.8l.3-2.4h-2.1V9c0-.4.3-.9.8-.9h.8V6.1h-1.4c-1.7 0-2.7 1.1-2.7 2.7v1.2H9.8v2.4H12V19h3.1v-6.6h1.8l.3-2.4H15V8z"/></svg>
             </a>
             <a href="https://twitter.com/johndakolias" target="_blank" rel="noreferrer" aria-label="Twitter">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 5.3c-.8.4-1.6.6-2.5.8.9-.5 1.6-1.3 1.9-2.3-.9.5-1.8.9-2.9 1.1-.8-.9-2-1.4-3.2-1.4-2.4 0-4.2 2-4.2 4.5 0 .4 0 .8.1 1.2-3.5-.2-6.7-1.8-8.8-4.3-.4.7-.5 1.5-.5 2.4 0 1.6.8 3.1 2 4-.7 0-1.3-.2-1.8-.5v.1c0 2.3 1.6 4.2 3.7 4.6-.4.1-.8.1-1.3.1-.3 0-.5 0-.8-.1.5 1.5 2 2.5 3.8 2.5-1.4 1.1-3.1 1.7-4.9 1.7H3c1.8 1.2 4 1.9 6.3 1.9 7.6 0 11.8-6.8 11.8-12.7v-.6c.8-.6 1.5-1.4 2-2.3z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 5.3c-.8.4-1.6.6-2.5.8.9-.5 1.6-1.3 1.9-2.3-.8.5-1.8.9-2.8 1.1-.8-.9-2-1.4-3.2-1.4-2.4 0-4.2 2-4.2 4.5 0 .4 0 .8.1 1.2-3.5-.2-6.7-1.8-8.8-4.3-.4.7-.5 1.5-.5 2.4 0 1.6.8 3.1 2 4-.7 0-1.3-.2-1.8-.5v.1c0 2.3 1.6 4.2 3.7 4.6-.4.1-.8.1-1.3.1-.3 0-.5 0-.8-.1.5 1.5 2 2.5 3.8 2.5-1.4 1.1-3.1 1.7-4.9 1.7H3c1.8 1.2 4 1.9 6.3 1.9 7.6 0 11.8-6.8 11.8-12.7v-.6c.8-.6 1.5-1.4 2-2.3z"/></svg>
             </a>
         </div>
     </nav>
