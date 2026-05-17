@@ -55,7 +55,7 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,0.16), rgba(0,0,0,0.72));
+            background: linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.45));
             z-index: 1;
             pointer-events: none;
         }
@@ -69,16 +69,21 @@
             object-fit: cover; 
             object-position: 45% 28%;
             z-index: 0; 
-            opacity: 0.95;
-            filter: brightness(0.70) contrast(1.1) saturate(1.05);
+            opacity: 1;
+            filter: brightness(1.06) contrast(1.08) saturate(1.06);
+            -webkit-backface-visibility: hidden;
+            transform: translateZ(0);
+            image-rendering: -webkit-optimize-contrast;
             display: block;
         }
 
         .home-text-container { 
             position: absolute; 
             bottom: 5%; 
-            left: 0; 
-            width: 100%; 
+            left: 52%;
+            transform: translateX(calc(-50% + 2px));
+            width: auto; 
+            max-width: 900px;
             z-index: 2; 
             text-align: center;
             box-sizing: border-box;
@@ -86,12 +91,14 @@
         }
 
         h1 { 
-            font-size: 4.5rem; 
+            font-size: 5.6rem; 
             letter-spacing: -2px; 
             margin: 0; 
             text-transform: uppercase; 
             line-height: 1;
             text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            white-space: nowrap;
+            display: inline-block;
         }
 
         .subtitle { 
@@ -129,7 +136,8 @@
             nav { gap: 15px; padding: 15px 0; }
             nav a { font-size: 0.7rem; letter-spacing: 1px; }
             #home img { object-position: 45% 8%; }
-            .home-text-container { bottom: 12%; }
+            .home-text-container { bottom: 12%; left: 0; transform: none; width: 100%; max-width: none; text-align: center; padding: 0 20px; }
+            h1 { white-space: normal; }
         }
     </style>
 </head>
@@ -146,7 +154,7 @@
      <section id="home">
         <img src="https://i.postimg.cc/8CWt4HVj/profile.jpg" alt="John Dakolias" loading="eager">
         <div class="home-text-container">
-            <h1 style="font-size: 6rem; letter-spacing: -2px; margin: 0; text-transform: uppercase; line-height: 1;">JOHN DAKOLIAS</h1>
+            <h1 style="letter-spacing: -2px; margin: 0; text-transform: uppercase; line-height: 1;">JOHN DAKOLIAS</h1>
             <p style="letter-spacing: 6px; color: #ccc; margin: 13px 0 0;">SINGER &amp; SONGWRITER</p>
         </div>
     </section>
