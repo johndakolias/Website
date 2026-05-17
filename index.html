@@ -26,14 +26,43 @@
             top: 0; 
             width: 100%; 
             background: rgba(204, 103, 20, 0.95);
-            padding: 20px 0; 
+            padding: 16px 24px; 
             display: flex; 
-            justify-content: center; 
-            gap: 25px; 
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px; 
             z-index: 1000; 
             border-bottom: 1px solid rgba(255,255,255,0.1); 
         }
-        nav a { color: #fff; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; }
+        .nav-brand {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+        .nav-toggle {
+            display: none;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.18);
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            line-height: 1;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+        .nav-toggle:hover { background: rgba(255,255,255,0.1); }
+        nav a, .nav-menu a { color: #fff; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; }
 
         section { 
             min-height: 100vh; 
@@ -125,9 +154,12 @@
             section { min-height: auto; padding: 60px 16px; }
             h1 { font-size: 3rem; letter-spacing: -1px; } 
             .subtitle { font-size: 0.85rem; letter-spacing: 3px; }
-            nav { gap: 12px; padding: 14px 0; flex-wrap: wrap; }
-            nav a { font-size: 0.75rem; letter-spacing: 1px; }
-            .home-text-container { bottom: 12%; left: 50%; transform: translateX(-50%); width: 90%; max-width: 640px; text-align: center; padding: 0 16px; }
+            nav { gap: 12px; padding: 14px 18px; }
+            .nav-toggle { display: inline-flex; }
+            .nav-menu { position: absolute; top: 100%; left: 0; right: 0; background: rgba(0,0,0,0.92); flex-direction: column; align-items: center; gap: 14px; padding: 0; max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.25s ease, opacity 0.25s ease, padding 0.25s ease; pointer-events: none; }
+            nav.open .nav-menu { max-height: 340px; opacity: 1; pointer-events: auto; padding: 16px 0; }
+            .nav-menu a { width: 100%; padding: 10px 20px; text-align: center; }
+            .home-text-container { top: 18%; bottom: auto; left: 50%; transform: translateX(-50%); width: 90%; max-width: 640px; text-align: center; padding: 0 16px; }
             .content-box { padding: 24px; max-width: 92%; border-radius: 20px; }
             .section-title { font-size: 1.7rem; margin-bottom: 32px; }
             .about-text { font-size: 1.16rem; line-height: 1.9; }
@@ -141,7 +173,7 @@
             body { background-position: center top; background-size: 120% auto; }
             h1 { font-size: 2.4rem; }
             .subtitle { font-size: 0.75rem; letter-spacing: 2px; }
-            .home-text-container { bottom: 10%; padding: 0 12px; }
+            .home-text-container { top: 14%; bottom: auto; padding: 0 12px; }
             .content-box { padding: 20px; }
             .section-title { font-size: 1.5rem; margin-bottom: 28px; }
             .video-frame { height: 220px; }
@@ -167,11 +199,15 @@
 <body>
 
     <nav>
-        <a href="#home">Home</a>
-        <a href="#music">Music</a>
-        <a href="#video">Video</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <a class="nav-brand" href="#home">John Dakolias</a>
+        <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-label="Open navigation">☰</button>
+        <div class="nav-menu" id="navMenu">
+            <a href="#home">Home</a>
+            <a href="#music">Music</a>
+            <a href="#video">Video</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
     </nav>
 
      <section id="home">
@@ -310,6 +346,26 @@
         });
 
         updateVideo();
+
+        const navToggle = document.getElementById('navToggle');
+        const nav = document.querySelector('nav');
+        const navLinks = document.querySelectorAll('.nav-menu a');
+
+        if (navToggle && nav) {
+            navToggle.addEventListener('click', () => {
+                const isOpen = nav.classList.toggle('open');
+                navToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (nav.classList.contains('open')) {
+                    nav.classList.remove('open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
     </script>
 
     <script>
