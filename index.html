@@ -6,6 +6,7 @@
     <title>John Dakolias | Official Site</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root { --nav-height: 72px; }
         html, body {
             margin: 0;
             width: 100%;
@@ -25,7 +26,7 @@
             color: #fff; 
             font-family: 'Inter', sans-serif; 
             scroll-behavior: smooth;
-            padding-top: 72px;
+            padding-top: var(--nav-height);
         }
         
         /* Navigation Menu */
@@ -93,62 +94,9 @@
         }
         .social-links svg { width: 18px; height: 18px; fill: #fff; }
         nav a, .nav-menu a { color: #fff; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; }
-
-        (function(){
-            const overlay = document.getElementById('newsletterOverlay');
-            const closeBtn = document.getElementById('newsletterClose');
-            const laterBtn = document.getElementById('newsletterLater');
-            const form = document.getElementById('newsletterForm');
-            const emailInput = document.getElementById('newsletterEmail');
-            const contactForm = document.getElementById('contactNewsletterForm');
-            const contactEmail = document.getElementById('contactNewsletterEmail');
-            const contactThankYou = document.getElementById('contactThankYou');
-
-            function getSubscribers(){
-                try{ return JSON.parse(localStorage.getItem('newsletter_subscribers')||'[]'); }catch(e){ return []; }
-            }
-            function saveSubscribers(list){ localStorage.setItem('newsletter_subscribers', JSON.stringify(list||[])); }
-            function addSubscriber(email){ if(!email) return false; email = email.trim(); if(!email) return false; const list = getSubscribers(); if(!list.includes(email)){ list.push(email); saveSubscribers(list); } localStorage.setItem('newsletter_email', email); localStorage.setItem('newsletter_subscribed','true'); return true; }
-
-            function shouldShow(){
-                 if(localStorage.getItem('newsletter_subscribed')==='true') return false;
-                 if(localStorage.getItem('newsletter_dismissed')==='true') return false;
-                 return true;
-            }
-            function openModal(){ overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false'); if(emailInput) emailInput.focus(); }
-            function closeModal(dismiss=false){ overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); if(dismiss) localStorage.setItem('newsletter_dismissed','true'); }
-
-            window.addEventListener('load', ()=>{ if(shouldShow()) setTimeout(openModal,1200);
-                // If already subscribed, show thank-you inline
-                if(localStorage.getItem('newsletter_subscribed')==='true' && contactThankYou){ contactThankYou.style.display='block'; contactThankYou.textContent = 'Thanks for subscribing!'; }
-            });
-
-            if(closeBtn) closeBtn.addEventListener('click', ()=> closeModal(true));
-            if(laterBtn) laterBtn.addEventListener('click', ()=> closeModal(true));
-            if(overlay) overlay.addEventListener('click', (e)=>{ if(e.target===overlay) closeModal(true); });
-
-            if(form) form.addEventListener('submit', (e)=>{ 
-                e.preventDefault(); 
-                const email = (emailInput && emailInput.value||'').trim(); 
-                if(!email) return; 
-                addSubscriber(email);
-                form.innerHTML = '<p style="margin:0 0 8px">Thanks — check your inbox!</p>'; 
-                setTimeout(()=> closeModal(false),1200); 
-            });
-
-            if(contactForm){
-                contactForm.addEventListener('submit', (e)=>{
-                    e.preventDefault();
-                    const email = (contactEmail && contactEmail.value||'').trim();
-                    if(!email) return;
-                    addSubscriber(email);
-                    if(contactThankYou){ contactThankYou.style.display='block'; contactThankYou.textContent = 'Thanks for subscribing!'; }
-                    contactForm.reset();
-                });
-            }
-
-            document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && overlay && overlay.classList.contains('open')) closeModal(true); });
-        })();
+        /* home overlay gradient */
+        #home::before {
+            content: "";
             position: absolute;
             inset: 0;
             background: linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.45));
@@ -199,6 +147,9 @@
         .btn:hover { background: #fff; color: #cc6714; font-weight: bold; }
         
         .section-title { font-size: 2rem; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 5px; color: rgba(255,255,255,0.9); }
+
+        /* Ensure home fills viewport under nav so sections don't merge */
+        #home { position: relative; min-height: calc(100vh - var(--nav-height)); display: block; padding: 40px 16px 80px; }
 
         .video-slider { max-width: 900px; width: 100%; position: relative; margin: 0 auto; }
         .video-frame { width: 100%; height: 520px; border: 0; border-radius: 16px; }
@@ -265,16 +216,17 @@
         @media (max-width:480px){ .newsletter-modal{ padding:18px } .newsletter-modal h3{font-size:1.1rem} .newsletter-actions{justify-content:stretch;flex-direction:column} }
 
         /* Tour / Shows */
-        .tour-section { padding: 80px 20px; background: linear-gradient(180deg, rgba(255,140,0,0.06), rgba(0,0,0,0.12)); }
-        .tour-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 12px; }
-        .show-item { background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border-radius: 12px; padding: 12px 14px; display: grid; grid-template-columns: 120px 1fr 160px; gap: 12px; align-items: center; border: 1px solid rgba(255,255,255,0.06); }
-        .show-left { font-weight: 700; color: #fff; display:flex; align-items:center; gap:8px; }
-        .show-venue { font-size: 1.05rem; color: #fff; }
-        .show-right { text-align: right; color: rgba(255,255,255,0.95); font-weight:600; }
-        .show-date { color: #ffeb3b; font-weight: 900; font-size: 1.05rem; }
+        .tour-section { padding: 90px 20px; background: linear-gradient(180deg, rgba(255,140,0,0.06), rgba(0,0,0,0.12)); }
+        .tour-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 12px; }
+        .show-item { background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border-radius: 12px; padding: 14px 16px; display: grid; grid-template-columns: 100px 1fr 160px; gap: 12px; align-items: center; border: 1px solid rgba(255,255,255,0.06); }
+        .show-left { font-weight: 800; color: #fff; display:flex; align-items:center; gap:10px; }
+        .show-venue { font-size: 1.25rem; color: #fff; }
+        .show-right { text-align: right; color: rgba(255,255,255,0.95); font-weight:800; font-size: 1.15rem; }
+        .show-date { color: #ffeb3b; font-weight: 900; font-size: 1.22rem; }
 
         /* Inline newsletter in contact */
-        .contact-newsletter { margin-top: 16px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+        .contact-newsletter { margin-top: 16px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:center; }
+        #contact { text-align: center; padding: 60px 20px; }
         .contact-newsletter input { flex:1 1 220px; min-width:160px; }
         .thank-you { color: #d4ffd6; background: rgba(0,0,0,0.25); padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.06); }
     </style>
@@ -524,24 +476,61 @@
 
     <script>
     (function(){
-      const overlay = document.getElementById('newsletterOverlay');
-      const closeBtn = document.getElementById('newsletterClose');
-      const laterBtn = document.getElementById('newsletterLater');
-      const form = document.getElementById('newsletterForm');
-      const emailInput = document.getElementById('newsletterEmail');
-      function shouldShow(){
-         if(localStorage.getItem('newsletter_subscribed')==='true') return false;
-         if(localStorage.getItem('newsletter_dismissed')==='true') return false;
-         return true;
-      }
-      function openModal(){ overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false'); if(emailInput) emailInput.focus(); }
-      function closeModal(dismiss=false){ overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); if(dismiss) localStorage.setItem('newsletter_dismissed','true'); }
-      window.addEventListener('load', ()=>{ if(shouldShow()) setTimeout(openModal,1200); });
-      if(closeBtn) closeBtn.addEventListener('click', ()=> closeModal(true));
-      if(laterBtn) laterBtn.addEventListener('click', ()=> closeModal(true));
-      if(overlay) overlay.addEventListener('click', (e)=>{ if(e.target===overlay) closeModal(true); });
-      if(form) form.addEventListener('submit', (e)=>{ e.preventDefault(); const email = (emailInput && emailInput.value||'').trim(); if(!email) return; localStorage.setItem('newsletter_email', email); localStorage.setItem('newsletter_subscribed','true'); form.innerHTML = '<p style="margin:0 0 8px">Thanks — check your inbox!</p>'; setTimeout(()=> closeModal(false),1200); });
-      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && overlay && overlay.classList.contains('open')) closeModal(true); });
+            const overlay = document.getElementById('newsletterOverlay');
+            const closeBtn = document.getElementById('newsletterClose');
+            const laterBtn = document.getElementById('newsletterLater');
+            const form = document.getElementById('newsletterForm');
+            const emailInput = document.getElementById('newsletterEmail');
+            const contactForm = document.getElementById('contactNewsletterForm');
+            const contactEmail = document.getElementById('contactNewsletterEmail');
+            const contactThankYou = document.getElementById('contactThankYou');
+
+            function getSubscribers(){
+                try{ return JSON.parse(localStorage.getItem('newsletter_subscribers')||'[]'); }catch(e){ return []; }
+            }
+            function saveSubscribers(list){ localStorage.setItem('newsletter_subscribers', JSON.stringify(list||[])); }
+            function addSubscriber(email){ if(!email) return false; email = email.trim(); if(!email) return false; const list = getSubscribers(); if(!list.includes(email)){ list.push(email); saveSubscribers(list); } localStorage.setItem('newsletter_email', email); localStorage.setItem('newsletter_subscribed','true'); return true; }
+
+            function shouldShow(){
+                 if(localStorage.getItem('newsletter_subscribed')==='true') return false;
+                 if(localStorage.getItem('newsletter_dismissed')==='true') return false;
+                 return true;
+            }
+            function openModal(){ if(!overlay) return; overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false'); if(emailInput) emailInput.focus(); }
+            function closeModal(dismiss=false){ if(!overlay) return; overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); if(dismiss) localStorage.setItem('newsletter_dismissed','true'); }
+
+            window.addEventListener('load', ()=>{
+                // show modal only if not subscribed/dismissed
+                if(shouldShow()) setTimeout(openModal,1200);
+                // if already subscribed, show inline thank-you in contact
+                if(localStorage.getItem('newsletter_subscribed')==='true' && contactThankYou){ contactThankYou.style.display='block'; contactThankYou.textContent = 'Thanks for subscribing!'; }
+            });
+
+            if(closeBtn) closeBtn.addEventListener('click', ()=> closeModal(true));
+            if(laterBtn) laterBtn.addEventListener('click', ()=> closeModal(true));
+            if(overlay) overlay.addEventListener('click', (e)=>{ if(e.target===overlay) closeModal(true); });
+
+            if(form) form.addEventListener('submit', (e)=>{ 
+                e.preventDefault(); 
+                const email = (emailInput && emailInput.value||'').trim(); 
+                if(!email) return; 
+                addSubscriber(email);
+                form.innerHTML = '<p style="margin:0 0 8px">Thanks — check your inbox!</p>'; 
+                setTimeout(()=> closeModal(false),1200); 
+            });
+
+            if(contactForm){
+                contactForm.addEventListener('submit', (e)=>{
+                    e.preventDefault();
+                    const email = (contactEmail && contactEmail.value||'').trim();
+                    if(!email) return;
+                    addSubscriber(email);
+                    if(contactThankYou){ contactThankYou.style.display='block'; contactThankYou.textContent = 'Thanks for subscribing!'; }
+                    contactForm.reset();
+                });
+            }
+
+            document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && overlay && overlay.classList.contains('open')) closeModal(true); });
     })();
     </script>
 </body>
