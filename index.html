@@ -185,11 +185,11 @@
             .video-thumb { min-width: 100px; width: 100px; }
             .video-thumb span { font-size: 0.72rem; }
             .video-thumbnails { gap: 10px; padding: 12px 0 0; }
-            .show-item { grid-template-columns: 80px 1fr 110px; padding: 10px 12px; gap:8px; }
-            .show-left, .show-venue, .show-right { word-break: break-word; line-height: 1.15; }
-            .show-venue { font-size: 1rem; }
-            .show-right { font-size: 1rem; }
-            .show-date { font-size: 1.02rem; }
+            .show-item { grid-template-columns: 70px 1fr 100px; padding: 8px 10px; gap:6px; }
+            .show-left, .show-venue, .show-right { word-break: break-word; line-height: 1.12; }
+            .show-venue { font-size: 0.92rem; }
+            .show-right { font-size: 0.92rem; }
+            .show-date { font-size: 0.95rem; }
         }
         @media (max-width: 480px) {
             body { background-position: center top; background-size: 120% auto; padding-top: 56px; }
@@ -209,9 +209,12 @@
             .show-date { font-size: 1.05rem; }
             .show-left, .show-venue, .show-right { word-break: break-word; line-height: 1.25; }
             /* Render show items as single-line rows with pipe separators */
-            .show-item { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; }
+            .show-item { display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 8px 10px; }
             .show-date::after, .show-venue::after { content: " | "; color: rgba(255,255,255,0.88); }
             .show-date, .show-venue, .show-right { white-space: nowrap; overflow: visible; }
+            .show-date { font-size: 0.92rem; }
+            .show-venue { font-size: 0.92rem; }
+            .show-right { font-size: 0.92rem; }
             .newsletter-actions { flex-direction: column; }
             .show-item { grid-template-columns: 1fr; grid-auto-rows: auto; text-align: left; }
             .show-right { text-align: left; }
