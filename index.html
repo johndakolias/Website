@@ -208,6 +208,10 @@
             .show-venue { font-size: 1.02rem; }
             .show-date { font-size: 1.05rem; }
             .show-left, .show-venue, .show-right { word-break: break-word; line-height: 1.25; }
+            /* Render show items as single-line rows with pipe separators */
+            .show-item { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; }
+            .show-date::after, .show-venue::after { content: " | "; color: rgba(255,255,255,0.88); }
+            .show-date, .show-venue, .show-right { white-space: nowrap; overflow: visible; }
             .newsletter-actions { flex-direction: column; }
             .show-item { grid-template-columns: 1fr; grid-auto-rows: auto; text-align: left; }
             .show-right { text-align: left; }
@@ -229,11 +233,9 @@
         .tour-section { padding: 90px 20px; background: linear-gradient(180deg, rgba(255,140,0,0.06), rgba(0,0,0,0.12)); }
         .tour-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 12px; }
         .show-item { background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border-radius: 12px; padding: 14px 16px; display: grid; grid-template-columns: 100px 1fr 160px; gap: 12px; align-items: center; border: 1px solid rgba(255,255,255,0.06); }
-        .show-left { font-weight: 800; color: #fff; display:flex; align-items:center; gap:10px; }
-        .show-left .show-venue { font-size: 1.25rem; color: #fff; flex: 1 1 auto; min-width: 0; }
-        .show-left .show-date { flex: 0 0 auto; }
-        .show-right { text-align: right; color: rgba(255,255,255,0.95); font-weight:800; font-size: 1.15rem; }
         .show-date { color: #ffeb3b; font-weight: 900; font-size: 1.22rem; }
+        .show-venue { font-size: 1.25rem; color: #fff; flex: 1 1 auto; min-width: 0; }
+        .show-right { text-align: right; color: rgba(255,255,255,0.95); font-weight:800; font-size: 1.15rem; }
 
         /* Subscribe button style for contact inline form */
         .subscribe-btn { background: #000; color: #fff; border: 1px solid rgba(255,255,255,0.12); }
@@ -285,47 +287,58 @@
         <h2 class="section-title">Summer Tour 2026</h2>
         <div class="tour-grid">
             <div class="show-item">
-                <div class="show-left"><span class="show-date"><strong>Jul 4</strong></span><div class="show-venue">Private Party</div></div>
+                <div class="show-date"><strong>Jul 4</strong></div>
+                <div class="show-venue">Private Party</div>
                 <div class="show-right">Patras, Greece</div>
             </div>
             <div class="show-item">
-                <div class="show-left"><span class="show-date"><strong>Jul 6</strong></span><div class="show-venue">Circus Bar</div></div>
+                <div class="show-date"><strong>Jul 6</strong></div>
+                <div class="show-venue">Circus Bar</div>
                 <div class="show-right">Ios, Greece</div>
             </div>
             <div class="show-item">
-                <div class="show-left"><span class="show-date"><strong>Jul 7</strong></span><div class="show-venue">Circus Bar</div></div>
+                <div class="show-date"><strong>Jul 7</strong></div>
+                <div class="show-venue">Circus Bar</div>
                 <div class="show-right">Ios, Greece</div>
             </div>
             <div class="show-item">
-                <div class="show-left"><span class="show-date"><strong>Jul 9</strong></span><div class="show-venue">Circus Bar</div></div>
+                <div class="show-date"><strong>Jul 9</strong></div>
+                <div class="show-venue">Circus Bar</div>
                 <div class="show-right">Ios, Greece</div>
             </div>
             <div class="show-item">
-                <div class="show-left"><span class="show-date"><strong>Jul 10</strong></span><div class="show-venue">Circus Bar</div></div>
+                <div class="show-date"><strong>Jul 10</strong></div>
+                <div class="show-venue">Circus Bar</div>
                 <div class="show-right">Ios, Greece</div>
             </div>
             <div class="show-item">
-                <div class="show-left"><span class="show-date"><strong>Jul 11</strong></span><div class="show-venue">Circus Bar</div></div>
+                <div class="show-date"><strong>Jul 11</strong></div>
+                <div class="show-venue">Circus Bar</div>
                 <div class="show-right">Ios, Greece</div>
             </div>
             <div class="show-item">
-                <div class="show-left"><span class="show-date"><strong>Jul 13</strong></span><div class="show-venue">Circus Bar</div></div>
+                <div class="show-date"><strong>Jul 13</strong></div>
+                <div class="show-venue">Circus Bar</div>
                 <div class="show-right">Ios, Greece</div>
             </div>
             <div class="show-item">
-                <div class="show-left"><span class="show-date"><strong>Jul 14</strong></span><div class="show-venue">Circus Bar</div></div>
+                <div class="show-date"><strong>Jul 14</strong></div>
+                <div class="show-venue">Circus Bar</div>
                 <div class="show-right">Ios, Greece</div>
             </div>
             <div class="show-item">
-                <div class="show-left"><span class="show-date"><strong>Aug 1</strong></span><div class="show-venue">Camping Antiparos</div></div>
+                <div class="show-date"><strong>Aug 1</strong></div>
+                <div class="show-venue">Camping Antiparos</div>
                 <div class="show-right">Antiparos, Greece</div>
             </div>
             <div class="show-item">
-                <div class="show-left"><span class="show-date"><strong>Aug 5</strong></span><div class="show-venue">Camping Antiparos</div></div>
+                <div class="show-date"><strong>Aug 5</strong></div>
+                <div class="show-venue">Camping Antiparos</div>
                 <div class="show-right">Antiparos, Greece</div>
             </div>
             <div class="show-item">
-                <div class="show-left"><span class="show-date"><strong>Aug 9</strong></span><div class="show-venue">Camping Antiparos</div></div>
+                <div class="show-date"><strong>Aug 9</strong></div>
+                <div class="show-venue">Camping Antiparos</div>
                 <div class="show-right">Antiparos, Greece</div>
             </div>
         </div>
