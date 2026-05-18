@@ -207,11 +207,11 @@
             .show-right { text-align: left; font-size: 1rem; }
             .show-venue { font-size: 1.02rem; }
             .show-date { font-size: 1.05rem; }
-            .show-left, .show-venue, .show-right { word-break: break-word; line-height: 1.25; }
+            .show-left, .show-venue, .show-right { word-break: normal; overflow-wrap: break-word; hyphens: none; line-height: 1.25; }
             /* Render show items flexibly: allow wrapping when needed to avoid overlap */
             .show-item { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px; padding: 8px 10px; }
             /* removed pipe separators */
-            .show-date, .show-venue, .show-right { white-space: normal; overflow: visible; }
+            .show-date, .show-venue, .show-right { white-space: normal; overflow: visible; word-break: normal; overflow-wrap: break-word; hyphens: none; }
             .show-date { font-size: 0.92rem; flex: 0 0 18%; min-width: 56px; }
             .show-venue { font-size: 0.92rem; flex: 1 1 52%; min-width: 120px; }
             .show-venue .v1, .show-venue .v2 { display: inline; }
@@ -258,8 +258,8 @@
         
         /* Mobile subscribe variant (blue) */
         @media (max-width: 768px) {
-            .subscribe-btn { background: #1e90ff; color: #fff; border-color: rgba(255,255,255,0.12); }
-            .subscribe-btn:hover { opacity: 0.95; }
+            .contact-newsletter .subscribe-btn { background: #1e90ff !important; color: #fff !important; border-color: rgba(255,255,255,0.12) !important; }
+            .contact-newsletter .subscribe-btn:hover { opacity: 0.95; }
         }
 
         /* Inline newsletter in contact */
