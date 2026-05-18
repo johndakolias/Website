@@ -93,26 +93,61 @@
         .social-links svg { width: 18px; height: 18px; fill: #fff; }
         nav a, .nav-menu a { color: #fff; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; }
 
-        section { 
-            min-height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            padding: 80px 20px; 
-            box-sizing: border-box; 
-            width: 100%;
-        }
-        
-        #home { 
-            position: relative; 
-            overflow: hidden; 
-            background: transparent;
-            min-height: 100vh;
-        }
+        (function(){
+            const overlay = document.getElementById('newsletterOverlay');
+            const closeBtn = document.getElementById('newsletterClose');
+            const laterBtn = document.getElementById('newsletterLater');
+            const form = document.getElementById('newsletterForm');
+            const emailInput = document.getElementById('newsletterEmail');
+            const contactForm = document.getElementById('contactNewsletterForm');
+            const contactEmail = document.getElementById('contactNewsletterEmail');
+            const contactThankYou = document.getElementById('contactThankYou');
 
-        #home::before {
-            content: "";
+            function getSubscribers(){
+                try{ return JSON.parse(localStorage.getItem('newsletter_subscribers')||'[]'); }catch(e){ return []; }
+            }
+            function saveSubscribers(list){ localStorage.setItem('newsletter_subscribers', JSON.stringify(list||[])); }
+            function addSubscriber(email){ if(!email) return false; email = email.trim(); if(!email) return false; const list = getSubscribers(); if(!list.includes(email)){ list.push(email); saveSubscribers(list); } localStorage.setItem('newsletter_email', email); localStorage.setItem('newsletter_subscribed','true'); return true; }
+
+            function shouldShow(){
+                 if(localStorage.getItem('newsletter_subscribed')==='true') return false;
+                 if(localStorage.getItem('newsletter_dismissed')==='true') return false;
+                 return true;
+            }
+            function openModal(){ overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false'); if(emailInput) emailInput.focus(); }
+            function closeModal(dismiss=false){ overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); if(dismiss) localStorage.setItem('newsletter_dismissed','true'); }
+
+            window.addEventListener('load', ()=>{ if(shouldShow()) setTimeout(openModal,1200);
+                // If already subscribed, show thank-you inline
+                if(localStorage.getItem('newsletter_subscribed')==='true' && contactThankYou){ contactThankYou.style.display='block'; contactThankYou.textContent = 'Thanks for subscribing!'; }
+            });
+
+            if(closeBtn) closeBtn.addEventListener('click', ()=> closeModal(true));
+            if(laterBtn) laterBtn.addEventListener('click', ()=> closeModal(true));
+            if(overlay) overlay.addEventListener('click', (e)=>{ if(e.target===overlay) closeModal(true); });
+
+            if(form) form.addEventListener('submit', (e)=>{ 
+                e.preventDefault(); 
+                const email = (emailInput && emailInput.value||'').trim(); 
+                if(!email) return; 
+                addSubscriber(email);
+                form.innerHTML = '<p style="margin:0 0 8px">Thanks — check your inbox!</p>'; 
+                setTimeout(()=> closeModal(false),1200); 
+            });
+
+            if(contactForm){
+                contactForm.addEventListener('submit', (e)=>{
+                    e.preventDefault();
+                    const email = (contactEmail && contactEmail.value||'').trim();
+                    if(!email) return;
+                    addSubscriber(email);
+                    if(contactThankYou){ contactThankYou.style.display='block'; contactThankYou.textContent = 'Thanks for subscribing!'; }
+                    contactForm.reset();
+                });
+            }
+
+            document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && overlay && overlay.classList.contains('open')) closeModal(true); });
+        })();
             position: absolute;
             inset: 0;
             background: linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.45));
@@ -224,6 +259,19 @@
         .newsletter-actions .btn { padding: 10px 18px; border-radius: 8px; }
         .newsletter-close { position: absolute; top: 12px; right: 14px; background: transparent; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; }
         @media (max-width:480px){ .newsletter-modal{ padding:18px } .newsletter-modal h3{font-size:1.1rem} .newsletter-actions{justify-content:stretch;flex-direction:column} }
+
+        /* Tour / Shows */
+        .tour-section { padding: 80px 20px; background: linear-gradient(180deg, rgba(255,140,0,0.06), rgba(0,0,0,0.12)); }
+        .tour-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 12px; }
+        .show-item { background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border-radius: 14px; padding: 18px 20px; display:flex; justify-content:space-between; align-items:center; border: 1px solid rgba(255,255,255,0.06); }
+        .show-left { font-weight: 600; color: #fff; }
+        .show-right { text-align: right; color: rgba(255,255,255,0.9); }
+        .show-date { color: #ffeb3b; font-weight: 800; margin-right: 12px; }
+
+        /* Inline newsletter in contact */
+        .contact-newsletter { margin-top: 16px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+        .contact-newsletter input { flex:1 1 220px; min-width:160px; }
+        .thank-you { color: #d4ffd6; background: rgba(0,0,0,0.25); padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.06); }
     </style>
 </head>
 <body>
@@ -257,6 +305,56 @@
         <div class="home-text-container">
             <h1 style="letter-spacing: -2px; margin: 0; text-transform: uppercase; line-height: 1;">JOHN DAKOLIAS</h1>
             <p style="letter-spacing: 6px; color: #ccc; margin: 13px 0 0;">SINGER &amp; SONGWRITER</p>
+        </div>
+    </section>
+
+    <section id="tour" class="tour-section">
+        <h2 class="section-title">Tour / Shows</h2>
+        <div class="tour-grid">
+            <div class="show-item">
+                <div class="show-left"><span class="show-date"><strong>Jul 4</strong></span> Private Party</div>
+                <div class="show-right">Patras, Greece</div>
+            </div>
+            <div class="show-item">
+                <div class="show-left"><span class="show-date"><strong>Jul 6</strong></span> Circus Bar</div>
+                <div class="show-right">Ios, Greece</div>
+            </div>
+            <div class="show-item">
+                <div class="show-left"><span class="show-date"><strong>Jul 7</strong></span> Circus Bar</div>
+                <div class="show-right">Ios, Greece</div>
+            </div>
+            <div class="show-item">
+                <div class="show-left"><span class="show-date"><strong>Jul 9</strong></span> Circus Bar</div>
+                <div class="show-right">Ios, Greece</div>
+            </div>
+            <div class="show-item">
+                <div class="show-left"><span class="show-date"><strong>Jul 10</strong></span> Circus Bar</div>
+                <div class="show-right">Ios, Greece</div>
+            </div>
+            <div class="show-item">
+                <div class="show-left"><span class="show-date"><strong>Jul 11</strong></span> Circus Bar</div>
+                <div class="show-right">Ios, Greece</div>
+            </div>
+            <div class="show-item">
+                <div class="show-left"><span class="show-date"><strong>Jul 13</strong></span> Circus Bar</div>
+                <div class="show-right">Ios, Greece</div>
+            </div>
+            <div class="show-item">
+                <div class="show-left"><span class="show-date"><strong>Jul 14</strong></span> Circus Bar</div>
+                <div class="show-right">Ios, Greece</div>
+            </div>
+            <div class="show-item">
+                <div class="show-left"><span class="show-date"><strong>Aug 1</strong></span> Camping Antiparos</div>
+                <div class="show-right">Antiparos, Greece</div>
+            </div>
+            <div class="show-item">
+                <div class="show-left"><span class="show-date"><strong>Aug 5</strong></span> Camping Antiparos</div>
+                <div class="show-right">Antiparos, Greece</div>
+            </div>
+            <div class="show-item">
+                <div class="show-left"><span class="show-date"><strong>Aug 9</strong></span> Camping Antiparos</div>
+                <div class="show-right">Antiparos, Greece</div>
+            </div>
         </div>
     </section>
 
@@ -301,6 +399,13 @@
         <h2 class="section-title">Contact</h2>
         <p>For bookings and inquiries:</p>
         <a href="mailto:email@example.com" class="btn">Send Email</a>
+        <div class="contact-newsletter">
+            <form id="contactNewsletterForm" style="display:flex;gap:8px;width:100%;max-width:520px;margin-top:12px;">
+                <input id="contactNewsletterEmail" type="email" placeholder="Your email address" required class="newsletter-input">
+                <button type="submit" class="btn">Subscribe</button>
+            </form>
+            <div id="contactThankYou" class="thank-you" style="display:none;">Thanks for subscribing!</div>
+        </div>
     </section>
 
     <!-- Newsletter modal -->
