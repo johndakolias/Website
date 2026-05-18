@@ -210,10 +210,11 @@
             .show-left, .show-venue, .show-right { word-break: break-word; line-height: 1.25; }
             /* Render show items flexibly: allow wrapping when needed to avoid overlap */
             .show-item { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px; padding: 8px 10px; }
-            .show-date::after, .show-venue::after { content: " | "; color: rgba(255,255,255,0.88); }
+            /* removed pipe separators */
             .show-date, .show-venue, .show-right { white-space: normal; overflow: visible; }
             .show-date { font-size: 0.92rem; flex: 0 0 18%; min-width: 56px; }
             .show-venue { font-size: 0.92rem; flex: 1 1 52%; min-width: 120px; }
+            .show-venue .v1, .show-venue .v2 { display: inline; }
             .show-right { font-size: 0.92rem; flex: 0 0 28%; min-width: 90px; text-align: right; }
             /* Contact subscribe button forced blue on mobile */
             .contact-newsletter .subscribe-btn { background: #1e90ff; color: #fff; border-color: rgba(255,255,255,0.12); }
@@ -227,6 +228,8 @@
             .show-venue { font-size: 0.82rem; flex: 1 1 50%; min-width: 100px; }
             .show-right { font-size: 0.82rem; flex: 0 0 30%; min-width: 80px; }
             .section-title { font-size: 1.3rem; }
+            /* On very small screens, stack venue words vertically to avoid mid-word hyphenation */
+            .show-venue .v1, .show-venue .v2 { display: block; }
         }
         /* Newsletter modal */
         .newsletter-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 2000; }
@@ -346,17 +349,17 @@
             </div>
             <div class="show-item">
                 <div class="show-date"><strong>Aug 1</strong></div>
-                <div class="show-venue">Camping Antiparos</div>
+                <div class="show-venue"><span class="v1">Camping</span> <span class="v2">Antiparos</span></div>
                 <div class="show-right">Antiparos, Greece</div>
             </div>
             <div class="show-item">
                 <div class="show-date"><strong>Aug 5</strong></div>
-                <div class="show-venue">Camping Antiparos</div>
+                <div class="show-venue"><span class="v1">Camping</span> <span class="v2">Antiparos</span></div>
                 <div class="show-right">Antiparos, Greece</div>
             </div>
             <div class="show-item">
                 <div class="show-date"><strong>Aug 9</strong></div>
-                <div class="show-venue">Camping Antiparos</div>
+                <div class="show-venue"><span class="v1">Camping</span> <span class="v2">Antiparos</span></div>
                 <div class="show-right">Antiparos, Greece</div>
             </div>
         </div>
