@@ -187,11 +187,12 @@
             .video-thumb { min-width: 100px; width: 100px; }
             .video-thumb span { font-size: 0.72rem; }
             .video-thumbnails { gap: 10px; padding: 12px 0 0; }
-            .show-item { grid-template-columns: 70px 1fr 100px; padding: 8px 10px; gap:6px; }
+            .tour-grid { display: flex; flex-direction: column; gap: 14px; }  
+            .show-item { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 16px; gap: 8px; background: rgba(255, 255, 255, 0.03);  border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.05); }
             .show-left, .show-venue, .show-right { word-break: break-word; line-height: 1.12; }
-            .show-venue { font-size: 0.92rem; }
-            .show-right { font-size: 0.92rem; }
-            .show-date { font-size: 0.95rem; }
+            .show-venue { font-size: 1.2rem; white-space: nowrap; font-weight: 600; }
+            .show-right { font-size: 0.95rem; }
+            .show-date { font-size: 1.1rem; }
         }
         @media (max-width: 480px) {
             body { background-position: center top; background-size: 120% auto; padding-top: 56px; }
@@ -386,7 +387,7 @@
                 <div class="show-date"><strong>Aug 9</strong></div>
                 <div class="show-venue"><span class="v1">Camping</span> <span class="v2">Antiparos</span></div>
                 <div class="show-right">Antiparos, Greece</div>
-            </div>
+            </div>    
         </div>
     </section>
 
